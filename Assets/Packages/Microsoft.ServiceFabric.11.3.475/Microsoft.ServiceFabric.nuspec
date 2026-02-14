@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Microsoft.ServiceFabric</id>
+    <version>11.3.475</version>
+    <title>Microsoft.ServiceFabric</title>
+    <authors>Microsoft</authors>
+    <owners>Microsoft,ServiceFabric</owners>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="file">eula.txt</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <icon>images\icon.png</icon>
+    <readme>docs\readme.md</readme>
+    <projectUrl>http://aka.ms/servicefabric</projectUrl>
+    <description>This package contains the reference assemblies required to build a Service Fabric service.</description>
+    <summary>This package contains the reference assemblies required to build a Service Fabric service.</summary>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <language>en-US</language>
+    <tags>ServiceFabric Microsoft Azure Fabric;</tags>
+    <dependencies>
+      <dependency id="System.Memory" version="4.5.5" />
+    </dependencies>
+  </metadata>
+</package>
