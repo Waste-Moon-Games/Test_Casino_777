@@ -11,9 +11,8 @@ namespace LootBox.UI.View
     public class LooBoxView : MonoBehaviourExtBind
     {
         [Header("Reel UI")]
-        [SerializeField] private RectTransform _topSlot;
-        [SerializeField] private RectTransform _midSlot;
-        [SerializeField] private RectTransform _bottomSlot;
+        [SerializeField] private RectTransform _content;
+        [SerializeField] private float _slotsYSpacing;
 
         [SerializeField] private Image _topImage;
         [SerializeField] private Image _midImage;
@@ -29,7 +28,6 @@ namespace LootBox.UI.View
         [SerializeField] private float _snapDuration = 0.12f;
 
         private readonly List<Image> _images = new(3);
-        private readonly List<RectTransform> _slots = new(3);
 
         private ReelMode _mode = ReelMode.Idle;
         private float _speed;
@@ -44,9 +42,9 @@ namespace LootBox.UI.View
         [OnAwake]
         private void Init()
         {
-            SetAt(_slots, 0, _topSlot);
-            SetAt(_slots, 1, _midSlot);
-            SetAt(_slots, 2, _bottomSlot);
+            _topImage.rectTransform.anchoredPosition = new Vector2(0, _slotHeight + _slotsYSpacing);
+            _midImage.rectTransform.anchoredPosition = Vector2.zero;
+            _bottomImage.rectTransform.anchoredPosition = new Vector2(0, -_slotHeight - _slotsYSpacing);
 
             SetAt(_images, 0, _topImage);
             SetAt(_images, 1, _midImage);
@@ -86,7 +84,7 @@ namespace LootBox.UI.View
             _mode = ReelMode.Decelerating;
         }
 
-        private static void SetAt<T>(List<T> list, int index, T value)
+        private void SetAt<T>(List<T> list, int index, T value)
         {
             while (list.Count <= index)
                 list.Add(default);
@@ -106,7 +104,7 @@ namespace LootBox.UI.View
                     _speed = _maxSpeed;
                     break;
                 case ReelMode.Decelerating:
-                    _speed = Mathf.MoveTowards(_maxSpeed, 0f, _deceleration * deltaTime);
+                    _speed = Mathf.MoveTowards(_speed, 0f, _deceleration * deltaTime);
                     if (_speed <= 0.001f)
                         BeginSnap();
                     break;
@@ -203,9 +201,7 @@ namespace LootBox.UI.View
 
         private void ApplyLayout()
         {
-            _slots[0].anchoredPosition = new Vector2(_slots[0].anchoredPosition.x, _slotHeight - _offset);
-            _slots[1].anchoredPosition = new Vector2(_slots[1].anchoredPosition.x, - _offset);
-            _slots[2].anchoredPosition = new Vector2(_slots[2].anchoredPosition.x, -_slotHeight - _offset);
+            _content.anchoredPosition = new Vector2( _content.anchoredPosition.x, -_offset);
         }
     }
 }
